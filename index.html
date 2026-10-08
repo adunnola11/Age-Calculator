@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Calculator</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+</head>
+<body>
+    
+    <div class="container">
+
+        <header>
+            <div class="title_area">
+                <div class="main_title">
+                    <h1>Age</h1>
+                    <h2>Calculator</h2>
+                </div>
+                <p class="languages">HTML . CSS . JS</p>
+            </div>
+            <div class="tagline">
+                <p>Calculate Your <br>Age instantly</p>
+                <spam>~</spam>
+            </div>
+        </header>
+
+        <main>
+            <!---------calculator section---------->
+            <section class="calculator_card">
+                  
+                 
+                <div class="section_title">
+                   <i class='bx bxs-calendar'></i>
+
+                    <div>
+                        <h3>Select Your Date Of Birth</h3>
+                        <p>Enter your date of birth to calculate your age </p>
+
+                    </div>
+                </div>
+
+            <!-----date input-->
+                 <div class="date_box">
+                    <input type="date" id="birthDate">
+                 </div>
+
+            <!-----calculate button-->
+            <button id="calculateBtn">
+               <i class='bx bxs-calendar'></i>
+                Calculate Age
+            </button>
+
+            <!-------results---->
+            <div class="results">
+
+            <div class="result_box">
+                <strong id="years">0</strong>
+                <span>YEARS</span>
+               <i class='bx bxs-calendar'></i>
+                
+            </div>
+
+             <div class="result_box">
+                <strong id="months">0</strong>
+                <span>MONTHS</span>
+                <i class='bx bxs-calendar'></i>
+            </div>
+
+             <div class="result_box">
+                <strong id="days">0</strong>
+                <span>DAYS</span>
+                <i class='bx bxs-calendar'></i>
+            </div>
+            </div>
+
+              </section>
+        </main> 
+
+    <!-----------bottom features---->
+    <footer>
+
+<div class="feature">
+    <i class='bx bx-desktop'></i>
+    <span>Responsive<br>Design</span>
+</div>
+
+<div class="feature">
+     <i class='bx bxs-zap'></i>
+    <span>Smooth<br>Transitions</span>
+</div>
+
+<div class="feature">
+    <i class='bx bxs-palette'></i>
+    <span>Modern<br>UI/UX</span>
+</div>
+
+<div class="feature">
+    <i class='bx bx-code-alt'></i>
+    <span>Clean<br>Code</span>
+</div>
+
+    </footer>
+ </div>
+
+<!--------javaScript----->
+
+<script>
+
+    const calculateBtn =
+    document.getElementById("calculateBtn");
+    
+    const birthDate =
+    document.getElementById("birthDate");
+
+    const years =
+    document.getElementById("years");
+    const months =
+    document.getElementById("months");
+    const days =
+    document.getElementById("days");
+
+    calculateBtn.addEventListener("click",function (){
+
+        //Get the date selected by the user 
+        const dob = birthDate.value;
+
+        //check if a date was selected
+        if(dob === ""){
+            alert("please select your date of birth.");
+            return;
+        }
+
+        //convert birth date to Date object
+        const birth = new Date(dob);
+
+        // Get today's date
+        const today = new Date();
+        
+        //prevent future dates 
+        if (birth > today) {
+            alert("Birth date connot be in the future.");
+            return;
+        }
+
+        //calculate basic age
+        let ageYears =
+        today.getFullYear() -
+        birth.getFullYear();
+
+        let ageMonths = 
+        today.getMonth() - 
+        birth.getMonth();
+
+        let ageDays = 
+        today.getDate() - 
+        birth.getDate();
+
+        // if the days are negative
+        if (ageDays < 0) {
+
+            ageMonths--;
+
+            // Get number of days in previous month
+            const previousMonth = new Date(
+                today.getFullYear(),
+                today.getMonth(),
+                0
+            );
+            ageDays += 
+            previousMonth.getDate();
+        }
+
+        // if the month are negative
+            if (ageMonths < 0){
+                ageYears--; 
+                ageMonths += 12
+            }
+
+            // display the result
+            years.textContent = ageYears; 
+            months.textContent = ageMonths; 
+            days.textContent = ageDays;
+    
+    });
+</script>
+
+
+
+
+
+
+</body>
+</html>
